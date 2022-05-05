@@ -71,7 +71,8 @@
             <span style="display: none;">틀린 알파벳 :</span>
         </div>
         <div style="position: absolute; height: 100vh; z-index: 1; text-align: center; margin: 0%;">
-            <img style="align-self: center; margin: 0%;">
+            <img style="position: absolute;align-self: center; margin: 0%;">
+            <div style="position: absolute;height: 100vh; width: 100vw; background-color: black; opacity: 0.3; display: none;" id="blackscreen"></div>
         </div>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script language="javascript">
@@ -117,7 +118,7 @@ function showHordle()
         if(txt.value != hold[showi])
         {
             num++;
-            if(hold.includes(txt.value))
+            if(word.split("").includes(txt.value))
             {
                 txt.style.backgroundColor = "#FFE5E5";
             } else {
@@ -177,7 +178,9 @@ function compare(H,i) {
         H.readOnly = true;
         if(num==0)
         {
+            document.getElementById("blackscreen").style.display = "block";
             document.getElementsByTagName("span")[0].innerText = "CONGRATULATIONS!!!";
+            document.getElementsByTagName("img")[0]
             document.getElementsByTagName("img")[0].src = source;
             if(size == 0)
             {
