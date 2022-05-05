@@ -67,7 +67,7 @@
             <input type="text" value="L" id="O" maxlength="1">
             <input type="text" value="E" id="P" maxlength="1">
             <br>
-            <span style="display: none;">남은 기회 15</span>
+            <span style="display: none;">틀린 횟수 0</span>
             <span style="display: none;">틀린 알파벳 :</span>
         </div>
         <div style="position: absolute; height: 100vh; z-index: 1; text-align: center; margin: 0%;">
@@ -79,7 +79,7 @@
 var word;
 var size = 0;
 var num = 0;
-var edit = 15;
+var edit = 0;
 var alpha = [];
 var source = "";
 var hold = ["","","","","","","","",""];
@@ -191,9 +191,10 @@ function compare(H,i) {
         }
         return;
     }
-    edit--;
+    edit++;
     //localStorage.setItem("edit",edit);
-    document.getElementsByTagName("span")[0].innerText = "남은 기회 " + edit;
+    document.getElementsByTagName("span")[0].innerText = "틀린 횟수 " + edit;
+    /*
     if(edit==0)
     {
         for(var i=0;i<hold.length;i++)
@@ -205,6 +206,7 @@ function compare(H,i) {
             }
         }
     }
+    */
     if(hold.includes(H.value.toUpperCase()))
     {
         H.style.backgroundColor = "#FFE5E5";
