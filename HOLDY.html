@@ -14,60 +14,99 @@
             p {
                 font-family: bold;
                 color: black;
-                font-size: 6vw;
+                font-size: 6vh;
                 margin: 0%;
                 padding: 0%;
-                line-height: 8vw;
+                line-height: 8vh;
             }
             span {
                 font-family: bold;
                 color: black;
             }
-            .box {
-                display:inline-block;
+            input {
+                font-family: bold;
+                color: black;
+                font-size: 6vh;
+                display:none;
                 background-color:white;
                 margin: 0%;
-                border: 2px solid #6C7C7D;
-                border-radius: 10px;
-                width: 6vw;
-                height: 8vw;
+                padding: 0%;
+                border: 0.6vh solid #6C7C7D;
+                border-radius: 3vh;
+                width: 6vh;
+                height: 8vh;
+                margin-top: 40vh;
+                text-align: center;
+            }
+            @media (max-aspect-ratio:1/1) {
+                input {
+                    font-size: 9vw;
+                    border: 0.7vw solid #6C7C7D;
+                    border-radius: 4vw;
+                    height: 15vw;
+                    width: 12vw;
+                }
             }
         </style>
     </head>
-    <body bgcolor=#F0F0F0 oncontextmenu="return false" ondragstart="return false" onselectstart="return false" style="text-align: center;">
-        <div class="box">
-            <p style="color: white;">H</p>
-        </div>
-        <div class="box">
-            <p style="color: white;">O</p>
-        </div>
-        <div class="box">
-            <p style="color: white;">L</p>
-        </div>
-        <div class="box">
-            <p style="color: white;">D</p>
-        </div>
-        <div class="box">
-            <p style="color: white;">Y</p>
-        </div>
+    <body bgcolor=#F0F0F0 oncontextmenu="return false" ondragstart="return false" onselectstart="return false" style="text-align: center; margin: 0%;">
+            <input type="text" value="H" id="H">
+            <input type="text" value="O" id="O">
+            <input type="text" value="L" id="L">
+            <input type="text" value="O" id="O">
+            <input type="text" value="W" id="W">
+            <input type="text" value="O" id="O">
+            <input type="text" value="R" id="R">
+            <input type="text" value="D" id="D">
+            <input type="text" value="Y" id="Y">
         <script language="javascript">
-            window.onload = function() {
-                setTimeout(function() {
-                    document.getElementsByClassName("box")[0].children[0].style.color = "black";
-                }, 200);
-                setTimeout(function() {
-                    document.getElementsByClassName("box")[1].children[0].style.color = "black";
-                }, 400);
-                setTimeout(function() {
-                    document.getElementsByClassName("box")[2].children[0].style.color =  "black";
-                }, 600);
-                setTimeout(function() {
-                    document.getElementsByClassName("box")[3].children[0].style.color = "black";
-                }, 800);
-                setTimeout(function() {
-                    document.getElementsByClassName("box")[4].children[0].style.color = "black";
-                }, 1000);
-            }
+var word = "HOLOWordy"
+var size = 0;
+var hold = ["","","","","","","",""];
+
+window.onload = function() {
+    if(window.innerWidth / window.innerHeight<1 && word.split("").length>6)
+    {
+        size = ( 100 / word.split("").length - 20 / word.split("").length);
+        console.log("a");
+    }
+    showHoldy();
+}
+
+var showi = 0;
+function showHoldy()
+{
+    if(showi<word.split("").length)
+    {
+        setTimeout(function() {
+        hold[showi] = word.split("")[showi];
+        document.getElementsByTagName("input")[showi].style.display = "inline-block";
+        if(size!=0)
+        {
+            document.getElementsByTagName("input")[showi].style.width = size + "vw";
+            document.getElementsByTagName("input")[showi].style.height = size/3*4 + "vw";
+            document.getElementsByTagName("input")[showi].style.fontSize = size - 1 + "vw";
+            document.getElementsByTagName("input")[showi].style.borderRadius = size/3 + "vw";
+            document.getElementsByTagName("input")[showi].style.borderWidth = size/20 + "vw";
+        }
+        showi++;
+        showHoldy();
+        }, 200);
+    }
+
+}
+
+H.oninput = function()
+{
+    if(H.value=="")
+    {
+        H.style.background = "#FFFFFF";
+    }
+    if(H.value!=""&&H.value!="H")
+    {
+        H.style.background = "#FFE5E5";
+    }
+}
         </script>
     </body>
 </html>
