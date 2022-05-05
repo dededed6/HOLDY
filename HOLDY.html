@@ -148,7 +148,7 @@ function readData() {
             var jsonData = dataTable.toJSON();
             jsonData = JSON.parse(jsonData);
             
-            var r = Math.floor(Math.random()*108);
+            var r = 22;
             word = jsonData.rows[r].c[0].v;
             source = jsonData.rows[r].c[1].v;
             if(window.innerWidth / window.innerHeight<1 && word.split("").length>6)
@@ -174,7 +174,7 @@ function compare(H,i) {
     if(H.value.toUpperCase()==hold[i])
     {
         num--;
-        hold.splice(i,1);
+        hold[i]="";
         H.style.backgroundColor = "#DBFCFF";
         H.readOnly = true;
         if(num==0)
