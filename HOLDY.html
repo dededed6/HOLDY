@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>HOLDY</title>
+        <style>
+            @font-face {
+                font-family: 'regular';
+                src: url(fonts/NanumBarunGothic.ttf);
+                font-family: 'bold';
+                src: url(fonts/NanumBarunGothicBold.ttf);
+            }
+            p {
+                font-family: bold;
+                color: black;
+                font-size: 6vw;
+                margin: 0%;
+                padding: 0%;
+                line-height: 8vw;
+            }
+            span {
+                font-family: bold;
+                color: black;
+            }
+            .box {
+                display:inline-block;
+                background-color:white;
+                margin: 0%;
+                border: 2px solid #6C7C7D;
+                border-radius: 10px;
+                width: 6vw;
+                height: 8vw;
+            }
+        </style>
+    </head>
+    <body bgcolor=#F0F0F0 oncontextmenu="return false" ondragstart="return false" onselectstart="return false" style="text-align: center;">
+        <div class="box">
+            <p> </p>
+        </div>
+        <div class="box">
+            <p> </p>
+        </div>
+        <div class="box">
+            <p> </p>
+        </div>
+        <div class="box">
+            <p> </p>
+        </div>
+        <div class="box">
+            <p> </p>
+        </div>
+        <script language="javascript">
+            window.onload = function()
+            {
+                setTimeout(function()
+                {
+                    document.getElementsByClassName("box")[0].children[0].innerText = "H";
+                }, 200);
+                setTimeout(function()
+                {
+                    document.getElementsByClassName("box")[1].children[0].innerText = "O";
+                }, 400);
+                setTimeout(function()
+                {
+                    document.getElementsByClassName("box")[2].children[0].innerText = "L";
+                }, 600);
+                setTimeout(function()
+                {
+                    document.getElementsByClassName("box")[3].children[0].innerText = "D";
+                }, 800);
+                setTimeout(function()
+                {
+                    document.getElementsByClassName("box")[4].children[0].innerText = "Y";
+                }, 1000);
+            }
+        </script>
+    </body>
+</html>
