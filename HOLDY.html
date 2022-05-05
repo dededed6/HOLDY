@@ -181,7 +181,15 @@ function compare(H,i) {
         if(num==0)
         {
             document.getElementById("blackscreen").style.display = "block";
-            document.getElementsByTagName("span")[0].innerText = "CONGRATULATIONS!!!";
+            if(edit/hold.length < 1.5) {
+                document.getElementsByTagName("span")[0].innerText = "PERFECT!!!";
+            }
+            else if(edit/hold.length < 2) {
+                document.getElementsByTagName("span")[0].innerText = "GREAT!!!";
+            }
+            else {
+                document.getElementsByTagName("span")[0].innerText = "GOOD!!!";
+            }
             document.getElementsByTagName("img")[0]
             document.getElementsByTagName("img")[0].src = source;
             if(window.innerWidth / window.innerHeight>1)
