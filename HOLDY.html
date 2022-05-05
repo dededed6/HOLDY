@@ -82,7 +82,7 @@ var num = 0;
 var edit = 0;
 var alpha = [];
 var source = "";
-var hold = ["","","","","","","","",""];
+var hold = [];
 
 window.onload = function() {
     num = 0;
@@ -132,7 +132,8 @@ function showHordle()
         } else {
             txt.style.backgroundColor = "#DBFCFF";
             txt.readOnly = true;
-            hold.splice(showi,1);
+            hold[showi]="";
+            word.split("")[showi]="";
         }
         showi++;
         showHordle();
