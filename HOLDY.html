@@ -182,7 +182,7 @@ function compare(H,i) {
             document.getElementsByTagName("span")[0].innerText = "CONGRATULATIONS!!!";
             document.getElementsByTagName("img")[0]
             document.getElementsByTagName("img")[0].src = source;
-            if(size == 0)
+            if(window.innerWidth / window.innerHeight>1)
             {
                 document.getElementsByTagName("img")[0].width = window.innerWidth;
             } else{
