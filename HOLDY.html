@@ -149,7 +149,7 @@ function readData() {
             var jsonData = dataTable.toJSON();
             jsonData = JSON.parse(jsonData);
             
-            var r = Math.floor(Math.random()*jsonData.rows.length);
+            var r = Math.floor(Math.random()*(jsonData.rows.length-1));
             word = jsonData.rows[r].c[0].v;
             source = jsonData.rows[r].c[1].v;
             if(window.innerWidth / window.innerHeight<1 && word.split("").length>6)
