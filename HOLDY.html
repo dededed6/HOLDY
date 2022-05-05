@@ -17,11 +17,14 @@
                 font-size: 6vh;
                 margin: 0%;
                 padding: 0%;
-                line-height: 8vh;
+                margin-top: 40vh;
+
             }
             span {
                 font-family: bold;
                 color: black;
+                font-size: 2vh;
+                margin-top: 1vh;
             }
             input {
                 font-family: bold;
@@ -32,11 +35,12 @@
                 margin: 0%;
                 padding: 0%;
                 border: 0.6vh solid #6C7C7D;
-                border-radius: 3vh;
+                border-radius: 2vh;
                 width: 6vh;
                 height: 8vh;
                 margin-top: 40vh;
                 text-align: center;
+                text-transform: capitalize;
             }
             @media (max-aspect-ratio:1/1) {
                 input {
@@ -49,64 +53,177 @@
             }
         </style>
     </head>
-    <body bgcolor=#F0F0F0 oncontextmenu="return false" ondragstart="return false" onselectstart="return false" style="text-align: center; margin: 0%;">
-            <input type="text" value="H" id="H">
-            <input type="text" value="O" id="O">
-            <input type="text" value="L" id="L">
-            <input type="text" value="O" id="O">
-            <input type="text" value="W" id="W">
-            <input type="text" value="O" id="O">
-            <input type="text" value="R" id="R">
-            <input type="text" value="D" id="D">
-            <input type="text" value="Y" id="Y">
-        <script language="javascript">
-var word = "HOLOWordy"
+    <body bgcolor=#F0F0F0 oncontextmenu="return false" ondragstart="return false" onselectstart="return false" style="text-align: center; margin: 0%; overflow-x:hidden;overflow-y:hidden" >
+        <div style="position: absolute; width: 100%; z-index: 2; margin: 0%;">
+            <p>HOLOWORDLE</p>
+            <input type="text" value="H" id="Q" maxlength="1">
+            <input type="text" value="O" id="W" maxlength="1">
+            <input type="text" value="L" id="E" maxlength="1">
+            <input type="text" value="O" id="R" maxlength="1">
+            <input type="text" value="W" id="T" maxlength="1">
+            <input type="text" value="O" id="Y" maxlength="1">
+            <input type="text" value="R" id="U" maxlength="1">
+            <input type="text" value="D" id="I" maxlength="1">
+            <input type="text" value="L" id="O" maxlength="1">
+            <input type="text" value="E" id="P" maxlength="1">
+            <br>
+            <span style="display: none;">남은 기회 15</span>
+            <span style="display: none;">틀린 알파벳 :</span>
+        </div>
+        <div style="position: absolute; height: 100vh; z-index: 1; text-align: center; margin: 0%;">
+            <img style="align-self: center; margin: 0%;">
+        </div>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script language="javascript">
+var word;
 var size = 0;
-var hold = ["","","","","","","",""];
+var num = 0;
+var edit = 15;
+var alpha = [];
+var source = "";
+var hold = ["","","","","","","","",""];
 
 window.onload = function() {
-    if(window.innerWidth / window.innerHeight<1 && word.split("").length>6)
-    {
-        size = ( 100 / word.split("").length - 20 / word.split("").length);
-        console.log("a");
-    }
-    showHoldy();
+    num = 0;
+    //if(localStorage.getItem("edit")!=null)
+    //{
+    //    edit = localStorage.getItem("edit");
+    //    document.getElementsByTagName("span")[0].innerText = "남은 기회 " + edit;
+    //}
+    readData();
 }
 
 var showi = 0;
-function showHoldy()
+function showHordle()
 {
     if(showi<word.split("").length)
     {
         setTimeout(function() {
         hold[showi] = word.split("")[showi];
-        document.getElementsByTagName("input")[showi].style.display = "inline-block";
+        let txt = document.getElementsByTagName("input")[showi];
+        //if(localStorage.getItem(showi)!=null)
+        //{
+        //    txt.value = localStorage.getItem(showi);
+        //}
+        txt.style.display = "inline-block";
         if(size!=0)
         {
-            document.getElementsByTagName("input")[showi].style.width = size + "vw";
-            document.getElementsByTagName("input")[showi].style.height = size/3*4 + "vw";
-            document.getElementsByTagName("input")[showi].style.fontSize = size - 1 + "vw";
-            document.getElementsByTagName("input")[showi].style.borderRadius = size/3 + "vw";
-            document.getElementsByTagName("input")[showi].style.borderWidth = size/20 + "vw";
+            txt.style.width = size + "vw";
+            txt.style.height = size/3*4 + "vw";
+            txt.style.fontSize = size - 1 + "vw";
+            txt.style.borderRadius = size/3 + "vw";
+            txt.style.borderWidth = size/20 + "vw";
+        }
+        if(txt.value != hold[showi])
+        {
+            num++;
+            if(hold.includes(txt.value))
+            {
+                txt.style.backgroundColor = "#FFE5E5";
+            } else {
+                txt.style.backgroundColor = "#FFFFFF";
+                if(!alpha.includes(txt.value))
+                {
+                    document.getElementsByTagName("span")[1].innerText = document.getElementsByTagName("span")[1].innerText + " " + txt.value;
+                    alpha.push(txt.value);
+                }
+            }
+        } else {
+            txt.style.backgroundColor = "#DBFCFF";
+            txt.readOnly = true;
+            hold.splice(showi,1);
         }
         showi++;
-        showHoldy();
+        showHordle();
         }, 200);
     }
-
 }
 
-H.oninput = function()
-{
+function readData() {
+    google.charts.load('current', { packages: ['corechart'] }).then(function () {
+        var query = new google.visualization.Query('http://spreadsheets.google.com/tq?key=1PD0HmHkx49Ow_8LSXeYarQmoolouKUYzsVvEs3obhUo&pub=1%27');
+        query.send(function (response) {
+            var dataTable = response.getDataTable();
+            var jsonData = dataTable.toJSON();
+            jsonData = JSON.parse(jsonData);
+            
+            var r = Math.floor(Math.random()*108);
+            word = jsonData.rows[r].c[0].v;
+            source = jsonData.rows[r].c[1].v;
+            if(window.innerWidth / window.innerHeight<1 && word.split("").length>6)
+            {
+                size = ( 100 / (word.split("").length+1) - 20 / (word.split("").length+1));
+                console.log("a");
+            }
+            showHordle();
+            document.getElementsByTagName("p")[0].style.display = "none";
+            document.getElementsByTagName("span")[0].style.display = "block";
+            document.getElementsByTagName("span")[1].style.display = "block";
+        });
+    });
+}
+
+function compare(H,i) {
+    //localStorage.setItem(i,H.value);
     if(H.value=="")
     {
         H.style.background = "#FFFFFF";
+        return;
     }
-    if(H.value!=""&&H.value!="H")
+    if(H.value.toUpperCase()==hold[i])
     {
-        H.style.background = "#FFE5E5";
+        num--;
+        H.style.backgroundColor = "#DBFCFF";
+        H.readOnly = true;
+        if(num==0)
+        {
+            document.getElementsByTagName("span")[0].innerText = "CONGRATULATIONS!!!";
+            document.getElementsByTagName("img")[0].src = source;
+            if(size == 0)
+            {
+                document.getElementsByTagName("img")[0].width = window.innerWidth;
+            } else{
+                document.getElementsByTagName("img")[0].height = window.innerHeight;
+            }
+        }
+        return;
+    }
+    edit--;
+    //localStorage.setItem("edit",edit);
+    document.getElementsByTagName("span")[0].innerText = "남은 기회 " + edit;
+    if(edit==0)
+    {
+        for(var i=0;i<hold.length;i++)
+        {
+            if(hold[i]!="")
+            {
+                document.getElementsByTagName("input")[i].value = hold[i];
+                document.getElementsByTagName("input")[i].readOnly = true;
+            }
+        }
+    }
+    if(hold.includes(H.value.toUpperCase()))
+    {
+        H.style.backgroundColor = "#FFE5E5";
+    } else {
+        H.style.backgroundColor = "#FFFFFF";
+        if(!alpha.includes(H.value.toUpperCase()))
+        {
+            document.getElementsByTagName("span")[1].innerText = document.getElementsByTagName("span")[1].innerText + " " + H.value.toUpperCase();
+            alpha.push(H.value.toUpperCase());
+        }
     }
 }
+Q.oninput = function() { compare(Q,0); }
+W.oninput = function() { compare(W,1); }
+E.oninput = function() { compare(E,2); }
+R.oninput = function() { compare(R,3); }
+T.oninput = function() { compare(T,4); }
+Y.oninput = function() { compare(Y,5); }
+U.oninput = function() { compare(U,6); }
+I.oninput = function() { compare(I,7); }
+O.oninput = function() { compare(O,8); }
+P.oninput = function() { compare(P,9); }
         </script>
     </body>
 </html>
