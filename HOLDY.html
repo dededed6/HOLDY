@@ -71,7 +71,7 @@
             <span style="display: none;">틀린 알파벳 :</span>
         </div>
         <div style="position: absolute; height: 100vh; z-index: 1; text-align: center; margin: 0%;">
-            <img style="position: absolute;align-self: center; margin: 0%;">
+            <img style="margin: 0%; width:100%; height:100%; object-fit:cover;">
             <div style="position: absolute;height: 100vh; width: 100vw; background-color: black; opacity: 0.3; display: none;" id="blackscreen"></div>
         </div>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
@@ -83,7 +83,7 @@ var edit = 0;
 var alpha = [];
 var source = "";
 var hold = [];
-var isMobile = /iPhone|iPod|Android/i.test(navigator.userAgent);
+//var isMobile = /iPhone|iPod|Android/i.test(navigator.userAgent);
 
 
 출처: https://inpa.tistory.com/entry/JS-📚-웹페이지에-접속하는-기기모바일태블릿PC-구분하기 [👨‍💻 Dev Scroll]
@@ -104,7 +104,7 @@ function showHordle()
     if(showi<word.split("").length)
     {
         setTimeout(function() {
-        hold[showi] = word.split("")[showi];
+        hold.push(word.split("")[showi]);
         let txt = document.getElementsByTagName("input")[showi];
         //if(localStorage.getItem(showi)!=null)
         //{
@@ -194,14 +194,14 @@ function compare(H,i) {
             else {
                 document.getElementsByTagName("span")[0].innerText = "GOOD!!!";
             }
-            document.getElementsByTagName("img")[0]
             document.getElementsByTagName("img")[0].src = source;
-            if(!(/Mobi/i.test(navigator.userAgent)))
+            /*if(!(/Mobi/i.test(navigator.userAgent)))
             {
                 document.getElementsByTagName("img")[0].width = window.innerWidth;
             } else{
                 document.getElementsByTagName("img")[0].height = screen.height;
-            }
+                document.getElementsByTagName("img")[0].offsetLeft = -document.getElementsByTagName("img")[0].width/2;
+            }*/
         }
         return;
     }
